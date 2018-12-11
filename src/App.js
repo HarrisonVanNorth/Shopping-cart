@@ -5,8 +5,8 @@ import CartItems from './components/CartItems';
 import AddItemForm from './components/AddItemForm';
 class App extends Component {
   
-  
   state = {
+  
     products: [
       { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
       { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 },
@@ -26,10 +26,11 @@ class App extends Component {
   }
   
   _handleSubmit = (item) => {
-    this.setState(({cartItemsList})=>{
-      console.log()
+    this.setState(({cartItemsList}) => {
+      item.id = this.state.cartItemsList.length + 1
       let newList = [...cartItemsList, item]
-      return {cartItemsList : newList}
+
+      return item.product && item.quantity ? {cartItemsList : newList} : cartItemsList
       
     })
   }
@@ -41,7 +42,7 @@ class App extends Component {
       <div>
         <Header/>
         <CartItems cartItemsList={this.state.cartItemsList} />
-        <AddItemForm products={this.state.products} _handleSubmit={this._handleSubmit} />
+        <AddItemForm products={this.state.products} _handleSubmit={this._handleSubmit}/>
         <Footer copy={copyright}/>
       </div>
     );

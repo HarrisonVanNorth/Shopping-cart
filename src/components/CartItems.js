@@ -1,8 +1,8 @@
 import React from 'react';
 import OneCartItem from './OneCartItem';
+import Total from './Total';
 
 const CartItems = ({cartItemsList}) => {
-  console.log(cartItemsList)
       let cartItem = cartItemsList.map(item => <OneCartItem key={item.id} item={item} />)
 
   return (
@@ -17,6 +17,7 @@ const CartItems = ({cartItemsList}) => {
           </div>
         </div>
         {cartItem}
+        <Total cartItemList={cartItemsList}/>
       </div>
     </div>
   );

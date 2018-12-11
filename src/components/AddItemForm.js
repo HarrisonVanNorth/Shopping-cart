@@ -2,42 +2,53 @@ import React from 'react';
 
 class AddItemForm extends React.Component {
   
-  state= {
-        item: { id: null , product: null, quantity: null}
+  state = {
+        product: false, 
+        quantity: false
   }
   
+  _handleNumChange = (e) => {
+    const {target} = e
+    this.setState(() => {
+      return{[target.name] : target.value}
+    })
+  }
+
   _handleChange = (e) => {
     const {target} = e
-      console.log(target.value)
-    this.setState((currentState) => {
-      currentState.item.id = Math.floor(Math.random(10))
-      currentState.item[target.name] = JSON.parse(target.value)
+    this.setState(() => {
+    return {[target.name] : JSON.parse(target.value)}
     })  
   } 
   
   _onSubmit = (e) => {
     e.preventDefault()
-    this.props._handleSubmit(this.state.item)
+    if(this.state.product && this.state.quantity){
+      this.props._handleSubmit(this.state)
+    }
   }
   
-  render(){
+
+
+  render() {
     const {products} = this.props
     let option = products.map((product) => <option key={product.id} value={JSON.stringify(product)} >{product.name}</option>)
     
     return (
   
-      <div className="container">
+      <div className="container my-3">
         <form onSubmit={this._onSubmit} className="list-group">
           <div className="form-group-item">
             <label htmlFor="quantity">Quantity</label>
             <div className="row">
-              <input type="text" className="form-control" onChange={this._handleChange} name="quantity"/>
+              <input type="text" className="form-control" onChange={this._handleNumChange} name="quantity"/>
             </div>
           </div>
-          <div className="form-group-item">
+          <div className="form-group-item  my-2">
             <label htmlFor="product">Products</label>
             <div className="row">
-              <select type="select" className="form-control" onChange={this._handleChange } name="product">
+              <select type="select" className="form-control" onChange={this._handleChange} name="product">
+                <option>Select Product</option>
                 {option}
               </select>
             </div>
