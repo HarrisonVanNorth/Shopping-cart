@@ -26,10 +26,11 @@ class App extends Component {
     ]
   }
   async componentDidMount() {
+    console.log(process.env)
     const productsResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/products`)
     const productsJSON = await productsResponse.json()
     this.setState({
-      products: productsJSON.products
+      products: productsJSON.productsJson
     })
   }
   
