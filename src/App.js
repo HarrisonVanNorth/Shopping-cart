@@ -30,7 +30,7 @@ class App extends Component {
     const productsResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/products`)
     const productsJSON = await productsResponse.json()
     this.setState({
-      products: productsJSON.productsJson
+      products: productsJSON
     })
   }
   
