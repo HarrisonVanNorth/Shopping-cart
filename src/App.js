@@ -26,12 +26,9 @@ class App extends Component {
     ]
   }
   async componentDidMount() {
-    console.log(process.env)
-    const productsResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/products`)
+    const productsResponse = await fetch('/api/products')
     const productsJSON = await productsResponse.json()
-    this.setState({
-      products: productsJSON
-    })
+    this.setState({products: productsJSON})
   }
   
   _handleSubmit = (item) => {
@@ -46,7 +43,6 @@ class App extends Component {
 
   render() {
     let copyright = '2016'
-
     return (
       <div>
         <Header/>
